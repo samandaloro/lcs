@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Longest Common Substring</title>
+    <style>
+        body {
+            font-family: Courier New;
+            text-align: center;
+            background-color: #e8e8e8;
+            color: black;
+            }
+        div {
+            margin: auto;
+            width: 50%;
+            }
+        button {
+            background-color: #72ed85;
+            color: black;
+            border: 2px solid black;
+            padding: 5px;
+            margin: auto;
+            width: 10%;
+            }
+        input {
+            text-align: center;
+            color: black;
+            border: 2px solid black;
+            padding: 5px;
+            margin: auto;
+            width: 30%;
+        }
+        p {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1> Longest Common Substring Finder </h1>
+<div>
+        <p>Enter strings in the below textboxes. Empty textboxes will be ignored</p>
+        <p>Click 'Find LCS' to generate the Longest Common Substring</p>
+        <p>Click '+' to add more textboxes</p><br>
+</div>
+<form id="setOfStrings">
+    <div id="boxes">
+        <input type="text" name="value"><br><br>
+        <input type="text" name="value"><br><br>
+        <input type="text" name="value"><br><br>
+    </div>
+
+    <button id="addBoxes" type="button" onclick="addBox()">+</button>
+    <br><br>
+    <button id="submitBtn" type="button">Find LCS</button>
+</form>
+
+<h4 id="response"></h4>
+
+<script>
+  $(document).ready(function() {
+    $('#submitBtn').click(function() {
+      var values = [];
+
+      $('#setOfStrings input[name="value"]').each(function() {
+        var val = $(this).val().trim();
+        if (val.length > 0) {
+          values.push({ "value": val });
+        }
+      });
+
+      //Place our values into a payload called 'setOfStrings'
+      var payload = {
+        "setOfStrings": values
+      };
+
+      //Make POST call to our API
+      $.ajax({
+        url: '/lcs',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function(resp) {
+            $('#response').html(JSON.stringify(resp));
+        },
+        error: function(jqXHR) {
+            alert('Error ' + jqXHR.status + ' ' + jqXHR.responseText);
+        }
+      });
+    });
+  });
+
+  function addBox() {
+    var list = $("#boxes");
+    var newBox = $('<input type="text" name="value"><br><br>');
+    list.append(newBox);
+  }
+
+</script>
+<br><br><br><p>Developed by Sam Andaloro</p>
+</body>
+</html>
