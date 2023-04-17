@@ -16,7 +16,7 @@ Developed by Sam Andaloro
 <img width="802" alt="Intellij Open" src="https://user-images.githubusercontent.com/112776220/232508247-718b6d43-6620-4e0d-a38b-8e8e8b60e070.png">
 
 
-3. Select the lcs-main directory
+3. Select the downloaded directory
 
 <img width="489" alt="Select project" src="https://user-images.githubusercontent.com/112776220/232508375-5280307c-db80-4b32-9fe9-b2b81a00b1e6.png">
 
